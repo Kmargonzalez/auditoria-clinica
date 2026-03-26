@@ -198,7 +198,7 @@ with col2:
     # 🟦 EVOLUCIÓN
     # ----------------------
     if evaluar_evo:
-    if texto_evolucion.strip():
+        if texto_evolucion.strip():
         score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
         st.session_state["score_evo"] = score_evo
         st.dataframe(df_evo)
