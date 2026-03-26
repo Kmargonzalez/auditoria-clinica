@@ -40,7 +40,7 @@ def similitud(texto, referencia):
     emb2 = embedding(referencia)
     return util.cos_sim(emb1, emb2).item()
 
-st.set_page_config(...)
+
 st.set_page_config(page_title="Auditoría Clínica", layout="wide")
 
 def limpiar_texto(texto):
