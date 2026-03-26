@@ -247,21 +247,6 @@ with col2:
         st.metric("Score", round(st.session_state["score_conc"], 2))
         st.dataframe(st.session_state["df_conc"], use_container_width=True)
         
-# 🟦 Mostrar evolución si ya existe
-if "df_evo" in st.session_state:
-    with st.container():
-        st.markdown("## 🟦 Evolución")
-        st.metric("Score Evolución", round(st.session_state["score_evo"], 2))
-        st.dataframe(st.session_state["df_evo"])
-
-
-# 🟥 Mostrar concurrencia si ya existe
-if "df_conc" in st.session_state:
-    with st.container():
-        st.markdown("## 🟥 Nota de Concurrencia")
-        st.metric("Score Concurrencia", round(st.session_state["score_conc"], 2))
-        st.dataframe(st.session_state["df_conc"])
-        
         # ----------------------
         # 🟩 USO DEL MÓDULO
         # ----------------------
