@@ -24,10 +24,23 @@ st.set_page_config(page_title="Auditoría Clínica", layout="wide")
 def limpiar_texto(texto):
     return texto.lower()
 
+import re
+
 def evaluar_identificacion(texto):
-    edad = bool(re.search(r'\b\d{1,3}\s*años\b', texto))
-    sexo = any(x in texto for x in ["masculino", "femenino"])
-    return 1 if (edad and sexo) else 0
+    texto = texto.lower()
+
+    # 🔹 Detectar edad (más flexible)
+    edad = bool(re.search(r'\b\d{1,3}\s*(años|anos)', texto))
+
+    # 🔹 Detectar sexo (más variantes)
+    sexo = any(x in texto for x in [
+        "masculino",
+        "femenino",
+        "hombre",
+        "mujer",
+        "paciente masculino",
+        "paciente femenina"
+    ])
 
 def evaluar_signos(texto):
     patrones = [
