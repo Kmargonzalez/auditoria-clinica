@@ -83,7 +83,7 @@ def evaluar_analisis_concurrencia(texto):
         any(e in texto for e in estructura)
     ) else 0
 
-criterios += [
+criterios = [
     {"nombre": "Identificación paciente", "peso": 0.3, "func": evaluar_identificacion},
     {"nombre": "Signos vitales", "peso": 0.5, "func": evaluar_signos},
     {"nombre": "Diagnóstico", "peso": 0.5, "func": evaluar_diagnostico},
