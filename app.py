@@ -200,46 +200,52 @@ st.divider()
 col1, col2 = st.columns([1, 1])
 
 # ----------------------
-# COLUMNA 1 (INPUT)
+# 🟦 IZQUIERDA (INPUT)
 # ----------------------
 with col1:
-    st.subheader("📄 Evolución clínica")
-    texto_evolucion = st.text_area("Pega la evolución clínica", height=200)
-    evaluar_evo = st.button("Evaluar Evolución 🟦")
+    st.markdown("### 📄 Evolución clínica")
+    texto_evolucion = st.text_area("Ingrese evolución clínica", height=250)
 
-    st.subheader("🟥 Nota de concurrencia")
-    texto_concurrencia = st.text_area("Pega la nota de concurrencia", height=200)
-    evaluar_conc = st.button("Evaluar Concurrencia 🟥")
+    evaluar_evo = st.button("Evaluar Evolución 🟦", use_container_width=True)
+
+    st.markdown("### 🟥 Nota de concurrencia")
+    texto_concurrencia = st.text_area("Ingrese nota de concurrencia", height=250)
+
+    evaluar_conc = st.button("Evaluar Concurrencia 🟥", use_container_width=True)
 
 # ----------------------
-# COLUMNA 2 (RESULTADOS)
+# 🟩 PROCESAMIENTO (fuera)
 # ----------------------
-with col2:
-    st.subheader("📊 Resultados")
-
-    # 🟦 EVOLUCIÓN
 if evaluar_evo:
-    
     if texto_evolucion.strip():
         score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
-        
         st.session_state["score_evo"] = score_evo
         st.session_state["df_evo"] = df_evo
-    else:
-        st.warning("⚠️ No ingresaste evolución")
 
-
-# 🟥 CONCURRENCIA
 if evaluar_conc:
-    
     if texto_concurrencia.strip():
         score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
-        
         st.session_state["score_conc"] = score_conc
         st.session_state["df_conc"] = df_conc
-    else:
-        st.warning("⚠️ No ingresaste concurrencia")
 
+# ----------------------
+# 🟨 DERECHA (RESULTADOS)
+# ----------------------
+
+with col2:
+    st.markdown("### 📊 Resultados")
+
+    # 🟦 Evolución
+    if "df_evo" in st.session_state:
+        st.markdown("#### 🟦 Evolución")
+        st.metric("Score", round(st.session_state["score_evo"], 2))
+        st.dataframe(st.session_state["df_evo"], use_container_width=True)
+
+    # 🟥 Concurrencia
+    if "df_conc" in st.session_state:
+        st.markdown("#### 🟥 Concurrencia")
+        st.metric("Score", round(st.session_state["score_conc"], 2))
+        st.dataframe(st.session_state["df_conc"], use_container_width=True)
 # 🟦 Mostrar evolución si ya existe
 if "df_evo" in st.session_state:
     with st.container():
