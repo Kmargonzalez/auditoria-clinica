@@ -25,8 +25,12 @@ def evaluar_diagnostico(texto):
     return 1 if any(k in texto for k in ["diagnostico", "impresion"]) else 0
 
 def evaluar_plan(texto):
-    return 1 if any(k in texto for k in keywords) else 0
-    def evaluar_procesos_pendientes(texto):
+     return 1 if any(k in texto for k in ["plan", "tratamiento", "manejo"]) else 0
+    # ----------------------
+# NOTA CONCURRENCIA
+# ----------------------
+
+def evaluar_procesos_pendientes(texto):
     keywords = [
         "pendiente",
         "interconsulta",
@@ -35,7 +39,7 @@ def evaluar_plan(texto):
         "cirugia",
         "remision"
     ]
-    
+    return 1 if any(k in texto for k in keywords) else 0
 
 
 def evaluar_justificacion_estancia(texto):
@@ -78,7 +82,6 @@ def evaluar_analisis_concurrencia(texto):
         any(c in texto for c in conectores) and
         any(e in texto for e in estructura)
     ) else 0
-    return 1 if any(k in texto for k in ["plan", "tratamiento", "manejo"]) else 0
 
 criterios += [
     {"nombre": "Identificación paciente", "peso": 0.3, "func": evaluar_identificacion},
