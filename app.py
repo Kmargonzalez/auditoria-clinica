@@ -246,6 +246,7 @@ with col2:
         st.markdown("#### 🟥 Concurrencia")
         st.metric("Score", round(st.session_state["score_conc"], 2))
         st.dataframe(st.session_state["df_conc"], use_container_width=True)
+        
 # 🟦 Mostrar evolución si ya existe
 if "df_evo" in st.session_state:
     with st.container():
