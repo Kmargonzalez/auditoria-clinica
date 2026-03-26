@@ -193,8 +193,9 @@ def evaluar_nota(texto):
 
     return total, pd.DataFrame(resultados)
 
-st.title("🩺 Auditoría Clínica Inteligente")
-st.markdown("Sistema de evaluación automática de evolución y concurrencia")
+
+st.markdown("<h1 style='text-align: center;'>🩺 Auditoría Clínica Inteligente</h1>", unsafe_allow_html=True)
+
 st.divider()
 # Crear columnas
 col1, col2 = st.columns([1, 1])
