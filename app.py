@@ -198,12 +198,10 @@ with col2:
     # 🟦 EVOLUCIÓN
     # ----------------------
     if evaluar_evo:
-        st.markdown("## 🟦 Evolución")
-
-        if texto_evolucion.strip():
-            score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
-            st.metric("Score Evolución", round(score_evo, 2))
-            st.dataframe(df_evo)
+    if texto_evolucion.strip():
+        score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
+        st.session_state["score_evo"] = score_evo
+        st.dataframe(df_evo)
         else:
             st.warning("⚠️ No ingresaste evolución")
 
@@ -211,12 +209,10 @@ with col2:
     # 🟥 CONCURRENCIA
     # ----------------------
     if evaluar_conc:
-        st.markdown("## 🟥 Nota de Concurrencia")
-
         if texto_concurrencia.strip():
-            score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
-            st.metric("Score Concurrencia", round(score_conc, 2))
-            st.dataframe(df_conc)
+        score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
+        st.session_state["score_conc"] = score_conc
+        st.dataframe(df_conc)
         else:
             st.warning("⚠️ No ingresaste nota de concurrencia")
 
@@ -237,15 +233,16 @@ if modulos:
 st.metric("Score Uso del Módulo", score_modulo)
 
         # 🔹 TOTAL
-        total = 0
+st.markdown("## 🧮 Score Total")
 
-        if texto_evolucion.strip():
-            total += score_evo
+total = 0
 
-        if texto_concurrencia.strip():
-            total += score_conc
+if "score_evo" in st.session_state:
+    total += st.session_state["score_evo"]
 
-        total += score_modulo
+if "score_conc" in st.session_state:
+    total += st.session_state["score_conc"]
 
-        st.markdown("## 🧮 Score Total")
-        st.metric("TOTAL", round(total, 2))
+total += score_modulo
+
+st.metric("TOTAL", round(total, 2))
