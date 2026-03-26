@@ -204,12 +204,12 @@ col1, col2 = st.columns([1, 1])
 # 🟦 IZQUIERDA (INPUT)
 # ----------------------
 with col1:
-    st.markdown("### 📄 Evolución clínica")
+    st.markdown("#### 📄 Evolución clínica")
     texto_evolucion = st.text_area("Ingrese evolución clínica", height=250)
 
     evaluar_evo = st.button("Evaluar Evolución 🟦", use_container_width=True)
 
-    st.markdown("### 🟥 Nota de concurrencia")
+    st.markdown("#### 🟥 Nota de concurrencia")
     texto_concurrencia = st.text_area("Ingrese nota de concurrencia", height=250)
 
     evaluar_conc = st.button("Evaluar Concurrencia 🟥", use_container_width=True)
@@ -251,7 +251,7 @@ with col2:
         # ----------------------
 with st.container():
 
-    st.markdown("## 🟩 Uso del Módulo")
+    st.markdown("#### 🟩 Uso del Módulo")
 
     asesoria = st.checkbox("📞 Solicitó asesoría en plataforma")
     modulos = st.checkbox("🧩 Usó módulos (demoras, fugas, fallas, hallazgos)")
@@ -265,7 +265,7 @@ with st.container():
     st.metric("Score Uso del Módulo", score_modulo)
 
         # 🔹 TOTAL
-st.markdown("## 🧮 Resultado Final")
+st.markdown("#### 🧮 Resultado Final")
 
 total = 0
 
