@@ -10,9 +10,13 @@ def cargar_modelo():
 
 model = cargar_modelo()
 
+@st.cache_data
+def embedding(texto):
+    return model.encode(texto)
+
 def similitud(texto, referencia):
-    emb1 = model.encode(texto)
-    emb2 = model.encode(referencia)
+    emb1 = embedding(texto)
+    emb2 = embedding(referencia)
     return util.cos_sim(emb1, emb2).item()
 
 st.set_page_config(page_title="Auditoría Clínica", layout="wide")
