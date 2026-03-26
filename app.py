@@ -181,12 +181,12 @@ col1, col2 = st.columns([1, 1])
 # ----------------------
 with col1:
     st.subheader("📄 Evolución clínica")
-    texto_evolucion = st.text_area("Pega la evolución clínica", height=150)
+    texto_evolucion = st.text_area("Pega la evolución clínica", height=200)
+    evaluar_evo = st.button("Evaluar Evolución 🟦")
 
     st.subheader("🟥 Nota de concurrencia")
-    texto_concurrencia = st.text_area("Pega la nota de concurrencia", height=150)
-
-    evaluar = st.button("Evaluar")
+    texto_concurrencia = st.text_area("Pega la nota de concurrencia", height=200)
+    evaluar_conc = st.button("Evaluar Concurrencia 🟥")
 
 # ----------------------
 # COLUMNA 2 (RESULTADOS)
@@ -194,11 +194,10 @@ with col1:
 with col2:
     st.subheader("📊 Resultados")
 
-    if evaluar:
-
-        # ----------------------
-        # 🟦 EVOLUCIÓN
-        # ----------------------
+    # ----------------------
+    # 🟦 EVOLUCIÓN
+    # ----------------------
+    if evaluar_evo:
         st.markdown("## 🟦 Evolución")
 
         if texto_evolucion.strip():
@@ -208,9 +207,10 @@ with col2:
         else:
             st.warning("⚠️ No ingresaste evolución")
 
-        # ----------------------
-        # 🟥 CONCURRENCIA
-        # ----------------------
+    # ----------------------
+    # 🟥 CONCURRENCIA
+    # ----------------------
+    if evaluar_conc:
         st.markdown("## 🟥 Nota de Concurrencia")
 
         if texto_concurrencia.strip():
@@ -225,16 +225,16 @@ with col2:
         # ----------------------
         st.markdown("## 🟩 Uso del Módulo")
 
-        asesoria = st.checkbox("¿Solicitó asesoría en plataforma?")
-        modulos = st.checkbox("¿Usó módulos (demoras, fugas, fallas, hallazgos)?")
+asesoria = st.checkbox("¿Solicitó asesoría en plataforma?")
+modulos = st.checkbox("¿Usó módulos (demoras, fugas, fallas, hallazgos)?")
 
-        score_modulo = 0
-        if asesoria:
-            score_modulo += 1.0
-        if modulos:
-            score_modulo += 1.8
+score_modulo = 0
+if asesoria:
+    score_modulo += 1.0
+if modulos:
+    score_modulo += 1.8
 
-        st.metric("Score Uso del Módulo", score_modulo)
+st.metric("Score Uso del Módulo", score_modulo)
 
         # 🔹 TOTAL
         total = 0
