@@ -44,8 +44,28 @@ def evaluar_diagnostico(texto):
     return 1 if score > 0.4 else 0
 
 def evaluar_plan(texto):
-    referencia = "el paciente requiere tratamiento o manejo medico o quirurgico"
+    texto = texto.lower()
+
+    # 🔹 Regla obligatoria (evita falsos positivos)
+    palabras_clave = [
+        "plan",
+        "tratamiento",
+        "manejo",
+        "se indica",
+        "se inicia",
+        "requiere",
+        "se realiza"
+    ]
+
+    tiene_keyword = any(p in texto for p in palabras_clave)
+
+    if not tiene_keyword:
+        return 0  # ❌ sin palabras clave → no hay plan
+
+    # 🔹 Validación con IA
+    referencia = "el paciente tiene un plan de tratamiento definido"
     score = similitud(texto, referencia)
+
     return 1 if score > 0.4 else 0
     # ----------------------
 # NOTA CONCURRENCIA
