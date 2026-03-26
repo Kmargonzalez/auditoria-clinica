@@ -145,8 +145,12 @@ col1, col2 = st.columns([1, 1])
 # COLUMNA 1 (INPUT)
 # ----------------------
 with col1:
-    st.subheader("📄 Nota clínica")
-    texto = st.text_area("Pega la nota clínica", height=400)
+    st.subheader("📄 Evolución clínica")
+    texto_evolucion = st.text_area("Pega la evolución clínica", height=200)
+
+    st.subheader("🟥 Nota de concurrencia")
+    texto_concurrencia = st.text_area("Pega la nota de concurrencia", height=200)
+
     evaluar = st.button("Evaluar")
 
 # ----------------------
@@ -155,19 +159,19 @@ with col1:
 with col2:
     st.subheader("📊 Resultados")
 
-    if evaluar and texto:
+    if evaluar:
 
-        # 🔹 Evolución
-        st.markdown("## 🟦 Evolución")
-        score_evo, df_evo = evaluar_grupo(texto, criterios_evolucion)
-        st.metric("Score Evolución", round(score_evo, 2))
-        st.dataframe(df_evo)
+    # 🔹 Evolución
+    st.markdown("## 🟦 Evolución")
+    score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
+    st.metric("Score Evolución", round(score_evo, 2))
+    st.dataframe(df_evo)
 
-        # 🔹 Concurrencia
-        st.markdown("## 🟥 Nota de Concurrencia")
-        score_conc, df_conc = evaluar_grupo(texto, criterios_concurrencia)
-        st.metric("Score Concurrencia", round(score_conc, 2))
-        st.dataframe(df_conc)
+    # 🔹 Concurrencia
+    st.markdown("## 🟥 Nota de Concurrencia")
+    score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
+    st.metric("Score Concurrencia", round(score_conc, 2))
+    st.dataframe(df_conc)
 
         # 🔹 Uso del módulo
         st.markdown("## 🟩 Uso del Módulo")
