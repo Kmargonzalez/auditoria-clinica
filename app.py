@@ -260,18 +260,18 @@ if "df_conc" in st.session_state:
         # ----------------------
 with st.container():
 
-st.markdown("## 🟩 Uso del Módulo")
+    st.markdown("## 🟩 Uso del Módulo")
 
-asesoria = st.checkbox("📞 Solicitó asesoría en plataforma")
-modulos = st.checkbox("🧩 Usó módulos (demoras, fugas, fallas, hallazgos)")
+    asesoria = st.checkbox("📞 Solicitó asesoría en plataforma")
+    modulos = st.checkbox("🧩 Usó módulos (demoras, fugas, fallas, hallazgos)")
 
-score_modulo = 0
-if asesoria:
-    score_modulo += 1.0
-if modulos:
-    score_modulo += 1.8
+    score_modulo = 0
+    if asesoria:
+        score_modulo += 1.0
+    if modulos:
+        score_modulo += 1.8
 
-st.metric("Score Uso del Módulo", score_modulo)
+    st.metric("Score Uso del Módulo", score_modulo)
 
         # 🔹 TOTAL
 st.markdown("## 🧮 Resultado Final")
