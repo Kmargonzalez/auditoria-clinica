@@ -196,18 +196,29 @@ with col2:
 
     if evaluar:
 
-        # 🔹 Evolución
+        # ----------------------
+        # 🟦 EVOLUCIÓN
+        # ----------------------
         st.markdown("## 🟦 Evolución")
-        score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
-        st.metric("Score Evolución", round(score_evo, 2))
-        st.dataframe(df_evo)
 
-        # 🔹 Concurrencia
+        if texto_evolucion.strip():
+            score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
+            st.metric("Score Evolución", round(score_evo, 2))
+            st.dataframe(df_evo)
+        else:
+            st.warning("⚠️ No ingresaste evolución")
+
+        # ----------------------
+        # 🟥 CONCURRENCIA
+        # ----------------------
         st.markdown("## 🟥 Nota de Concurrencia")
-        score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
-        st.metric("Score Concurrencia", round(score_conc, 2))
-        st.dataframe(df_conc)
 
+        if texto_concurrencia.strip():
+            score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
+            st.metric("Score Concurrencia", round(score_conc, 2))
+            st.dataframe(df_conc)
+        else:
+            st.warning("⚠️ No ingresaste nota de concurrencia")
         # 🔹 Uso del módulo
         st.markdown("## 🟩 Uso del Módulo")
 
