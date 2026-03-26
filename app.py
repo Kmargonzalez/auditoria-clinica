@@ -161,33 +161,33 @@ with col2:
 
     if evaluar:
 
-    # 🔹 Evolución
-    st.markdown("## 🟦 Evolución")
-    score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
-    st.metric("Score Evolución", round(score_evo, 2))
-    st.dataframe(df_evo)
+        # 🔹 Evolución
+        st.markdown("## 🟦 Evolución")
+        score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
+        st.metric("Score Evolución", round(score_evo, 2))
+        st.dataframe(df_evo)
 
-    # 🔹 Concurrencia
-    st.markdown("## 🟥 Nota de Concurrencia")
-    score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
-    st.metric("Score Concurrencia", round(score_conc, 2))
-    st.dataframe(df_conc)
+        # 🔹 Concurrencia
+        st.markdown("## 🟥 Nota de Concurrencia")
+        score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
+        st.metric("Score Concurrencia", round(score_conc, 2))
+        st.dataframe(df_conc)
 
-    # 🔹 Uso del módulo
-    st.markdown("## 🟩 Uso del Módulo")
+        # 🔹 Uso del módulo
+        st.markdown("## 🟩 Uso del Módulo")
 
-    asesoria = st.checkbox("¿Solicitó asesoría en plataforma?")
-    modulos = st.checkbox("¿Usó módulos (demoras, fugas, fallas, hallazgos)?")
+        asesoria = st.checkbox("¿Solicitó asesoría en plataforma?")
+        modulos = st.checkbox("¿Usó módulos (demoras, fugas, fallas, hallazgos)?")
 
-    score_modulo = 0
-    if asesoria:
-        score_modulo += 1.0
-    if modulos:
-        score_modulo += 1.8
+        score_modulo = 0
+        if asesoria:
+            score_modulo += 1.0
+        if modulos:
+            score_modulo += 1.8
 
-    st.metric("Score Uso del Módulo", score_modulo)
+        st.metric("Score Uso del Módulo", score_modulo)
 
-    # 🔹 TOTAL
-    total = score_evo + score_conc + score_modulo
-    st.markdown("## 🧮 Score Total")
-    st.metric("TOTAL", round(total, 2))
+        # 🔹 TOTAL
+        total = score_evo + score_conc + score_modulo
+        st.markdown("## 🧮 Score Total")
+        st.metric("TOTAL", round(total, 2))
