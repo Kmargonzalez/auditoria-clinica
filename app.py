@@ -194,28 +194,26 @@ with col1:
 with col2:
     st.subheader("📊 Resultados")
 
-    # ----------------------
     # 🟦 EVOLUCIÓN
-    # ----------------------
-    if evaluar_evo:
-        if texto_evolucion.strip():
+if evaluar_evo:
+    
+    if texto_evolucion.strip():
         score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
         st.session_state["score_evo"] = score_evo
         st.dataframe(df_evo)
-        else:
-            st.warning("⚠️ No ingresaste evolución")
+    else:
+        st.warning("⚠️ No ingresaste evolución")
 
-    # ----------------------
-    # 🟥 CONCURRENCIA
-    # ----------------------
-    if evaluar_conc:
-        if texto_concurrencia.strip():
+
+# 🟥 CONCURRENCIA
+if evaluar_conc:
+    
+    if texto_concurrencia.strip():
         score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
         st.session_state["score_conc"] = score_conc
         st.dataframe(df_conc)
-        else:
-            st.warning("⚠️ No ingresaste nota de concurrencia")
-
+    else:
+        st.warning("⚠️ No ingresaste concurrencia")
         # ----------------------
         # 🟩 USO DEL MÓDULO
         # ----------------------
