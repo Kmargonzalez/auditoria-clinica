@@ -25,13 +25,72 @@ def evaluar_diagnostico(texto):
     return 1 if any(k in texto for k in ["diagnostico", "impresion"]) else 0
 
 def evaluar_plan(texto):
+    # ----------------------
+# NOTA CONCURRENCIA
+# ----------------------
+
+def evaluar_procesos_pendientes(texto):
+    keywords = [
+        "pendiente",
+        "interconsulta",
+        "valoracion",
+        "procedimiento",
+        "cirugia",
+        "remision"
+    ]
+    return 1 if any(k in texto for k in keywords) else 0
+
+
+def evaluar_justificacion_estancia(texto):
+    criterios_medicos = [
+        "requiere manejo",
+        "necesita hospitalizacion",
+        "vigilancia",
+        "tratamiento intravenoso"
+    ]
+
+    criterios_admin = [
+        "demora",
+        "administrativo",
+        "autorizacion",
+        "espera"
+    ]
+
+    return 1 if (
+        any(c in texto for c in criterios_medicos) or
+        any(c in texto for c in criterios_admin)
+    ) else 0
+
+
+def evaluar_analisis_concurrencia(texto):
+    conectores = [
+        "debido a",
+        "por lo tanto",
+        "se considera",
+        "lo que indica",
+        "en consecuencia"
+    ]
+
+    estructura = [
+        "analisis",
+        "conclusion",
+        "evaluacion"
+    ]
+
+    return 1 if (
+        any(c in texto for c in conectores) and
+        any(e in texto for e in estructura)
+    ) else 0
     return 1 if any(k in texto for k in ["plan", "tratamiento", "manejo"]) else 0
 
-criterios = [
+criterios += [
     {"nombre": "Identificación paciente", "peso": 0.3, "func": evaluar_identificacion},
     {"nombre": "Signos vitales", "peso": 0.5, "func": evaluar_signos},
     {"nombre": "Diagnóstico", "peso": 0.5, "func": evaluar_diagnostico},
     {"nombre": "Plan de manejo", "peso": 0.5, "func": evaluar_plan},
+    {"nombre": "Procesos pendientes", "peso": 1.5, "func": evaluar_procesos_pendientes},
+    {"nombre": "Justificación de estancia", "peso": 2.0, "func": evaluar_justificacion_estancia},
+    {"nombre": "Análisis técnico-administrativo", "peso": 0.9, "func": evaluar_analisis_concurrencia},
 ]
 
 def evaluar_nota(texto):
