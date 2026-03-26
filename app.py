@@ -219,7 +219,10 @@ with col2:
             st.dataframe(df_conc)
         else:
             st.warning("⚠️ No ingresaste nota de concurrencia")
-        # 🔹 Uso del módulo
+
+        # ----------------------
+        # 🟩 USO DEL MÓDULO
+        # ----------------------
         st.markdown("## 🟩 Uso del Módulo")
 
         asesoria = st.checkbox("¿Solicitó asesoría en plataforma?")
@@ -234,6 +237,15 @@ with col2:
         st.metric("Score Uso del Módulo", score_modulo)
 
         # 🔹 TOTAL
-        total = score_evo + score_conc + score_modulo
+        total = 0
+
+        if texto_evolucion.strip():
+            total += score_evo
+
+        if texto_concurrencia.strip():
+            total += score_conc
+
+        total += score_modulo
+
         st.markdown("## 🧮 Score Total")
         st.metric("TOTAL", round(total, 2))
