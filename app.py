@@ -4,11 +4,15 @@ import pandas as pd
 
 from sentence_transformers import SentenceTransformer, util
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
+@st.cache_resource
+def cargar_modelo():
+    return SentenceTransformer('all-MiniLM-L6-v2')
+
+model = cargar_modelo()
 
 def similitud(texto, referencia):
-    emb1 = model.encode(texto, convert_to_tensor=True)
-    emb2 = model.encode(referencia, convert_to_tensor=True)
+    emb1 = model.encode(texto)
+    emb2 = model.encode(referencia)
     return util.cos_sim(emb1, emb2).item()
 
 st.set_page_config(page_title="Auditoría Clínica", layout="wide")
