@@ -181,10 +181,10 @@ col1, col2 = st.columns([1, 1])
 # ----------------------
 with col1:
     st.subheader("📄 Evolución clínica")
-    texto_evolucion = st.text_area("Pega la evolución clínica", height=200)
+    texto_evolucion = st.text_area("Pega la evolución clínica", height=150)
 
     st.subheader("🟥 Nota de concurrencia")
-    texto_concurrencia = st.text_area("Pega la nota de concurrencia", height=200)
+    texto_concurrencia = st.text_area("Pega la nota de concurrencia", height=150)
 
     evaluar = st.button("Evaluar")
 
