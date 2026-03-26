@@ -129,7 +129,7 @@ def evaluar_grupo(texto, criterios):
 
     for c in criterios:
         val = c["func"](texto)
-        score = val * c["peso"]
+        score = int(val) * c["peso"]
         total += score
 
         resultados.append({
