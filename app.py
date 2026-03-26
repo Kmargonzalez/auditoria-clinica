@@ -237,13 +237,11 @@ with col2:
 
     # 🟦 Evolución
     if "df_evo" in st.session_state:
-        st.markdown("#### 🟦 Evolución")
         st.metric("Score", round(st.session_state["score_evo"], 2))
         st.dataframe(st.session_state["df_evo"], use_container_width=True)
 
     # 🟥 Concurrencia
     if "df_conc" in st.session_state:
-        st.markdown("#### 🟥 Concurrencia")
         st.metric("Score", round(st.session_state["score_conc"], 2))
         st.dataframe(st.session_state["df_conc"], use_container_width=True)
         
