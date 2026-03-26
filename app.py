@@ -199,8 +199,9 @@ if evaluar_evo:
     
     if texto_evolucion.strip():
         score_evo, df_evo = evaluar_grupo(texto_evolucion, criterios_evolucion)
+        
         st.session_state["score_evo"] = score_evo
-        st.dataframe(df_evo)
+        st.session_state["df_evo"] = df_evo
     else:
         st.warning("⚠️ No ingresaste evolución")
 
@@ -210,14 +211,29 @@ if evaluar_conc:
     
     if texto_concurrencia.strip():
         score_conc, df_conc = evaluar_grupo(texto_concurrencia, criterios_concurrencia)
+        
         st.session_state["score_conc"] = score_conc
-        st.dataframe(df_conc)
+        st.session_state["df_conc"] = df_conc
     else:
         st.warning("⚠️ No ingresaste concurrencia")
+
+# 🟦 Mostrar evolución si ya existe
+if "df_evo" in st.session_state:
+    st.markdown("## 🟦 Evolución")
+    st.metric("Score Evolución", round(st.session_state["score_evo"], 2))
+    st.dataframe(st.session_state["df_evo"])
+
+
+# 🟥 Mostrar concurrencia si ya existe
+if "df_conc" in st.session_state:
+    st.markdown("## 🟥 Nota de Concurrencia")
+    st.metric("Score Concurrencia", round(st.session_state["score_conc"], 2))
+    st.dataframe(st.session_state["df_conc"])
+        
         # ----------------------
         # 🟩 USO DEL MÓDULO
         # ----------------------
-        st.markdown("## 🟩 Uso del Módulo")
+st.markdown("## 🟩 Uso del Módulo")
 
 asesoria = st.checkbox("¿Solicitó asesoría en plataforma?")
 modulos = st.checkbox("¿Usó módulos (demoras, fugas, fallas, hallazgos)?")
