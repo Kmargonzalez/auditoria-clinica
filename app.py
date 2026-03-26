@@ -42,6 +42,8 @@ def evaluar_identificacion(texto):
         "paciente femenina"
     ])
 
+    return 1 if (edad and sexo) else 0
+
 def evaluar_signos(texto):
     patrones = [
         "frecuencia cardiaca",
