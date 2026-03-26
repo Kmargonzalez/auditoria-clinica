@@ -91,6 +91,14 @@ criterios += [
     {"nombre": "Procesos pendientes", "peso": 1.5, "func": evaluar_procesos_pendientes},
     {"nombre": "Justificación de estancia", "peso": 2.0, "func": evaluar_justificacion_estancia},
     {"nombre": "Análisis técnico-administrativo", "peso": 0.9, "func": evaluar_analisis_concurrencia},
+
+    # ----------------------
+    # NOTA CONCURRENCIA
+    # ----------------------
+
+    {"nombre": "Procesos pendientes", "peso": 1.5, "func": evaluar_procesos_pendientes},
+    {"nombre": "Justificación de estancia", "peso": 2.0, "func": evaluar_justificacion_estancia},
+    {"nombre": "Análisis técnico-administrativo", "peso": 0.9, "func": evaluar_analisis_concurrencia},
 ]
 
 def evaluar_nota(texto):
