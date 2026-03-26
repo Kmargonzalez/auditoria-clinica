@@ -45,13 +45,22 @@ def evaluar_identificacion(texto):
     return 1 if (edad and sexo) else 0
 
 def evaluar_signos(texto):
+    texto = texto.lower()
+
     patrones = [
-        "frecuencia cardiaca",
-        "presion arterial",
-        "frecuencia respiratoria",
-        "temperatura"
+        r"frecuencia\s*card",        # frecuencia cardiaca
+        r"frecuencia\s*resp",        # frecuencia respiratoria
+        r"temperatura",
+        r"saturacion",
+        r"\bta\b",                  # TA
+        r"sist",                    # sistólica
+        r"diast",                   # diastólica
+        r"\d+\s*/\s*\d+"            # presión tipo 120/80
     ]
-    return 1 if sum(p in texto for p in patrones) >= 2 else 0
+
+    encontrados = sum(bool(re.search(p, texto)) for p in patrones)
+
+    return 1 if encontrados >= 2 else 0
 
 def evaluar_diagnostico(texto):
     referencia = "el paciente tiene un diagnostico medico claro de una enfermedad"
