@@ -25,7 +25,7 @@ def evaluar_diagnostico(texto):
     return 1 if any(k in texto for k in ["diagnostico", "impresion"]) else 0
 
 def evaluar_plan(texto):
-    def evaluar_procesos_pendientes(texto):
+def evaluar_procesos_pendientes(texto):
     keywords = [
         "pendiente",
         "interconsulta",
