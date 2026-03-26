@@ -205,12 +205,12 @@ col1, col2 = st.columns([1, 1])
 # ----------------------
 with col1:
     st.markdown("#### 📄 Evolución clínica")
-    # texto_evolucion = st.text_area("Ingrese evolución clínica", height=250)
+    texto_evolucion = st.text_area("Ingrese evolución clínica", height=250)
 
     evaluar_evo = st.button("Evaluar Evolución 🟦", use_container_width=True)
 
     st.markdown("#### 🟥 Nota de concurrencia")
-    #texto_concurrencia = st.text_area("Ingrese nota de concurrencia", height=250)
+    texto_concurrencia = st.text_area("Ingrese nota de concurrencia", height=250)
 
     evaluar_conc = st.button("Evaluar Concurrencia 🟥", use_container_width=True)
 
