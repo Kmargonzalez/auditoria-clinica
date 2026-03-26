@@ -2,6 +2,15 @@ import streamlit as st
 import re
 import pandas as pd
 
+from sentence_transformers import SentenceTransformer, util
+
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+def similitud(texto, referencia):
+    emb1 = model.encode(texto, convert_to_tensor=True)
+    emb2 = model.encode(referencia, convert_to_tensor=True)
+    return util.cos_sim(emb1, emb2).item()
+
 st.set_page_config(page_title="Auditoría Clínica", layout="wide")
 
 def limpiar_texto(texto):
@@ -22,10 +31,14 @@ def evaluar_signos(texto):
     return 1 if sum(p in texto for p in patrones) >= 2 else 0
 
 def evaluar_diagnostico(texto):
-    return 1 if any(k in texto for k in ["diagnostico", "impresion"]) else 0
+    referencia = "el paciente tiene un diagnostico medico claro de una enfermedad"
+    score = similitud(texto, referencia)
+    return 1 if score > 0.4 else 0
 
 def evaluar_plan(texto):
-     return 1 if any(k in texto for k in ["plan", "tratamiento", "manejo"]) else 0
+    referencia = "el paciente requiere tratamiento o manejo medico o quirurgico"
+    score = similitud(texto, referencia)
+    return 1 if score > 0.4 else 0
     # ----------------------
 # NOTA CONCURRENCIA
 # ----------------------
@@ -43,46 +56,16 @@ def evaluar_procesos_pendientes(texto):
 
 
 def evaluar_justificacion_estancia(texto):
-    criterios_medicos = [
-        "requiere manejo",
-        "necesita hospitalizacion",
-        "vigilancia",
-        "tratamiento intravenoso"
-    ]
-
-    criterios_admin = [
-        "demora",
-        "administrativo",
-        "autorizacion",
-        "espera"
-    ]
-
-    return 1 if (
-        any(c in texto for c in criterios_medicos) or
-        any(c in texto for c in criterios_admin)
-    ) else 0
+    referencia = "el paciente necesita hospitalizacion por condicion medica"
+    score = similitud(texto, referencia)
+    return 1 if score > 0.4 else 0
 
 
 def evaluar_analisis_concurrencia(texto):
-    conectores = [
-        "debido a",
-        "por lo tanto",
-        "se considera",
-        "lo que indica",
-        "en consecuencia"
-    ]
-
-    estructura = [
-        "analisis",
-        "conclusion",
-        "evaluacion"
-    ]
-
-    return 1 if (
-        any(c in texto for c in conectores) and
-        any(e in texto for e in estructura)
-    ) else 0
-
+    referencia = "el texto contiene analisis clinico con razonamiento medico"
+    score = similitud(texto, referencia)
+    return 1 if score > 0.45 else 0
+    
 criterios_evolucion = [
     {"nombre": "Identificación paciente", "peso": 0.3, "func": evaluar_identificacion},
     {"nombre": "Signos vitales", "peso": 0.5, "func": evaluar_signos},
